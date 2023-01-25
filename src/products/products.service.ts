@@ -116,4 +116,18 @@ export class ProductsService {
     this.productRepository.remove(product);
   }
   
+  async removeAll() {
+    const query = this.productRepository.createQueryBuilder('products');    
+
+    try {
+      return await query
+        .delete()
+        .where({});
+
+    } catch (error) {
+
+      this.logger.error(error);
+      throw new BadRequestException(error.detail);
+    }
+  }
 }
