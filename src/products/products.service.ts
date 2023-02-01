@@ -8,6 +8,8 @@ import { UpdateProductDto } from './dto/update-product.dto';
 import { PaginationDto } from '../common/dto/pagination.dto';
 import { validate } from 'uuid';
 import { Product, ProductImage } from './entities';
+import { join } from 'path';
+import { existsSync } from 'fs';
 
 @Injectable()
 export class ProductsService {
@@ -115,9 +117,9 @@ export class ProductsService {
     const product = await this.findOne(id);
     this.productRepository.remove(product);
   }
-  
+
   async removeAll() {
-    const query = this.productRepository.createQueryBuilder('products');    
+    const query = this.productRepository.createQueryBuilder('products');
 
     try {
       return await query
@@ -129,5 +131,15 @@ export class ProductsService {
       this.logger.error(error);
       throw new BadRequestException(error.detail);
     }
+  }
+
+  getStaticProductImage(imageName: string) {
+
+    const path = join(__dirname, '../../upload/products', imageName);
+
+    if (!existsSync(path))
+      throw new BadRequestException(`No product found with image ${imageName}`);
+
+    return path;
   }
 }
