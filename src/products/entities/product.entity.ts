@@ -42,15 +42,15 @@ export class Product {
     createSlug() {
         this.slug = this.title
             .toLowerCase()
-            .replaceAll(' ', '-')
-            .replaceAll("'", '');
+            .replace(/ ./g, '-')
+            .replace(/'./g, '');
     }
 
     @BeforeUpdate()
     updateSlug() {
         this.slug = this.title
             .toLowerCase()
-            .replaceAll(' ', '-')
-            .replaceAll("'", '');
+            .replace(/ ./g, '-')
+            .replace(/'./g, '');
     }
 }
