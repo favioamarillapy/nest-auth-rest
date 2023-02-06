@@ -30,7 +30,7 @@ export class AuthService {
 
       return {
         ...user, token:
-          this.generateJwt({ email: user.email })
+          this.generateJwt({ email: user.id })
       };
     } catch (error) {
       this.logger.error(error);
@@ -60,7 +60,7 @@ export class AuthService {
 
       return {
         ...user,
-        token: this.generateJwt({ email: user.email })
+        token: this.generateJwt({ email: user.id })
       };
     } catch (error) {
       this.logger.error(error);
