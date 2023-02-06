@@ -24,32 +24,4 @@ export class AuthController {
     return this.authService.login(loginUserDto);
   }
 
-  @Get('private')
-  @UseGuards(AuthGuard())
-  private(
-    @GetUser() user: User,
-    @RawHeader() header: string[],
-  ) {
-    return { user, header };
-  }
-
-  @Get('private2')
-  @RoleProtected()
-  @UseGuards(AuthGuard(), UserRoleGuard)
-  private2(
-    @GetUser() user: User,
-    @RawHeader() header: string[],
-  ) {
-    return { user, header };
-  }
-
-  @Get('private3')
-  @Auth()
-  private3(
-    @GetUser() user: User,
-    @RawHeader() header: string[],
-  ) {
-    return { user, header };
-  }
-
 }
