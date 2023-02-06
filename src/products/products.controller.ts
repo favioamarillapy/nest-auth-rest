@@ -12,8 +12,10 @@ import { Response } from 'express';
 import { ConfigService } from '@nestjs/config';
 import { Auth } from '../auth/decorators';
 import { ValidRoles } from '../auth/interfaces';
+import { ApiTags } from '@nestjs/swagger/dist';
 
 @Controller('products')
+@ApiTags('Products')
 export class ProductsController {
 
   constructor(
