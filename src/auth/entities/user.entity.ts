@@ -1,5 +1,5 @@
 import { isEmail } from "class-validator";
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity('users')
 export class User {
@@ -10,7 +10,7 @@ export class User {
     @Column('text', { unique: true })
     email: string;
 
-    @Column('text')
+    @Column('text', { select: false })
     password: string;
 
     @Column('text')
